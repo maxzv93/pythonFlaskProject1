@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Название вкладки</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <script src="{{ url_for('static', filename='script/wow.js') }}"></script>
 	</head>
 
 	<body>
@@ -29,7 +31,3 @@
        </table>
 	</body>
 </html>
-
-<script>
-    alert('wow')
-</script>
