@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Калькулятор jinja</title>
+	</head>
+
+	<body>
+
+        <!-- Создайте заголовок на строке ниже -->
+        <h1 align="center">Калькулятор jinja</h1>
+        <!-- Создайте ссылку на строке ниже и оберните изображение -->
+        <h2>
+            {% if operate == ':' %}
+                {% if b == 0 %}
+                    <p>Ошибка</p>
+                {% else %}
+                    {{a/b}}
+                {% endif %}
+            {% elif operate == '+' %}
+                {{a+b}}
+            {% elif operate == '-' %}
+                {{a-b}}
+            {% elif operate == '*' %}
+                {{a*b}}
+            {% elif operate == '**' %}
+                {{a**b}}
+            {% else %}
+                <p>Ошибка</p>
+            {% endif %}
+        </h2>
+	</body>
+</html>

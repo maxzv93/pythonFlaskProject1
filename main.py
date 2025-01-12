@@ -12,6 +12,20 @@ def index():
 def my_index():
     return render_template('my_index.html')
 
+
+@app.route('/pow2/<string:chislo>/')
+def pow_index(chislo):
+    anstext = "Ваше число "  + chislo + ", умноженное на 2: "+ str(float(chislo)*2)
+    return render_template('pow_index.html', text = anstext)
+
+@app.route('/round_square/radius/<string:chislo>/')
+def round_square(chislo):
+    return render_template('round_square.html', r = float(chislo), pi=float(3.14))
+
+@app.route('/calc/<string:a>/<string:operate>/<string:b>/')
+def calcJinja(a, b, operate):
+    return render_template('calc.html', a = float(a), b = float(b), operate = operate)
+
 # @app.route('/albums/1')
 # def hello_world():
 #     return 'Hello, Flask'
