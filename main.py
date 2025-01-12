@@ -8,6 +8,10 @@ app = Flask(__name__)
 def index():
     return 'Hello, world!'
 
+@app.route('/my_index')
+def my_index():
+    return render_template('my_index.html')
+
 # @app.route('/albums/1')
 # def hello_world():
 #     return 'Hello, Flask'
