@@ -1,0 +1,21 @@
+<DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Some page{% endblock %}</title>
+    </head>
+
+    <body>
+        {% blockmenu %}
+            <nav>
+                <a href="/">Home</a>
+                <a href="#">About</a>
+            </nav>
+        {% endblock %}
+
+        {% blockcontent %}
+
+        {% endblock %}
+    </body>
+
+</html>
