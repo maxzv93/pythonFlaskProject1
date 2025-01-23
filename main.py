@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from Order import Order
 
 app = Flask(__name__)
@@ -13,15 +13,33 @@ def index():
 def my_index():
     return render_template('my_index.html')
 
-orders = {43: Order(43, 'Оплата картой, через почту', ['Кружка', 'Майка', 'Стикеры']), 69: Order(69, 'Оплата наличными, через почту', ['Медные диски'])}
+
+orders = {43: Order(43, 'Оплата картой, через почту', ['Кружка', 'Майка', 'Стикеры']),
+          69: Order(69, 'Оплата наличными, через почту', ['Медные диски'])}
+
 
 @app.route("/order", methods=["POST"])
 def render_send():
     # client_message = request.form.get('id')
-    if int(request.form.get('id')) in orders.keys() :
+    if int(request.form.get('id')) in orders.keys():
         return repr(orders[int(request.form.get('id'))])
     else:
         return "Ошибка"
+
+
+news = {}
+news['Успешный разработчик'] = 'Вы не поверите, но он добился успеха после изучения Flask!'
+news['Красный и белый'] = 'Эти удивительные цвета прекрасно гармонируют при выборе одежды.'
+
+@app.route("/", methods=["GET", "POST"])
+def render_post():
+    if request.method == "POST":
+        title = request.form.get('title')
+        content = request.form.get('content')
+        news[title] = content
+        if title == None or title == "" or content == None or content == "":
+            return abort(404)  # Ошибка не найденного ресурса
+        return render_template('news.html', news=news)
 
 
 @app.route('/pow2/<string:chislo>/')
@@ -71,7 +89,7 @@ def calcFunction(operate):
     if "**" in operate:
         parts = operate.split(sep='**', maxsplit=--1)
         result = parts[0] + ' ** ' + parts[1] + ' = ' + str(int(parts[0]) ** int(parts[1]))
-        return "Калькулятор python вернул результат " +result
+        return "Калькулятор python вернул результат " + result
     if "*" in operate:
         parts = operate.split(sep='*', maxsplit=--1)
         result = parts[0] + ' * ' + parts[1] + ' = ' + str(int(parts[0]) * int(parts[1]))
