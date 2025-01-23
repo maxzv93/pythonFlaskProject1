@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from Order import Order
 
 app = Flask(__name__)
 
@@ -11,6 +12,16 @@ def index():
 @app.route('/my_index')
 def my_index():
     return render_template('my_index.html')
+
+orders = {43: Order(43, 'Оплата картой, через почту', ['Кружка', 'Майка', 'Стикеры']), 69: Order(69, 'Оплата наличными, через почту', ['Медные диски'])}
+
+@app.route("/order", methods=["POST"])
+def render_send():
+    # client_message = request.form.get('id')
+    if int(request.form.get('id')) in orders.keys() :
+        return repr(orders[int(request.form.get('id'))])
+    else:
+        return "Ошибка"
 
 
 @app.route('/pow2/<string:chislo>/')
